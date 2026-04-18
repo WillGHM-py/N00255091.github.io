@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--Imports Chart.js-->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+
+<head>
+    <title>Computers Project [215082]</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<style>
+    .chart-container {
+        /*Sets a max width and centers the container*/
+        max-width: 600px;
+        margin: auto;
+    }
+
+    button {
+        /*Adds padding,adds a margin at the top, changes the cursor type,adds a background, changes the text colour removes the border and rounds the corners*/
+        padding: 10px;
+        margin-top: 10px;
+        cursor: pointer;
+        background: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+    }
+
+    .filter-controls {
+        /*Adds space above the fileter*/
+        margin-top: 10px;
+    }
+</style>
+</head>
+
+<body>
+    <!-- Creates the nav bar, assigns it titles and the links that the nav bar will link to-->
+    <nav>
+        <a href="Home.html">Home</a>
+        <a href="graphs.html">Graphs</a>
+        <a href="table.html">Table</a>
+        <a href="survey.html">Poll</a>
+        <a href="advice.html">Advice</a>
+    </nav>
+
+    <header>
+        <h1>Computers Project [215082]</h1>
+    </header>
+
+    <main>
+        <!--Displays the Pie Chart-->
+        <div class="content-box"><!--Creates a box for the pie chart-->
+            <h2>Preferred Exercise Pie Chart (Number of People)</h2>
+            <canvas id="PieChart"></canvas><!--Displays the Pie chart using canvas-->
+        </div>
+
+        <!-- Displays the Bar Chart -->
+        <div class="content-box">
+            <h2>Age Distribution Bar Chart</h2>
+            <canvas id="BarChart" width="1000" height="400"></canvas> <!--Displays the Bar chart using canvas-->
+            <div class="filter-controls"> <!--Creates the filter controls-->
+                <!--Creates a user input for the filter and assigsn the min and max number able to be used-->
+                <label>Min Age: <input type="number" id="minAge" value="18" min="18" max="59"></label>
+                <label>Max Age: <input type="number" id="maxAge" value="59" min="18" max="59"></label>
+            </div>
+            <button onclick="filterBarChart()">Filter</button>
+            <!--Creates a button that applies the filiter when clickerd-->
+            <button onclick="resetChart()">Reset</button> <!--Creates a button that will reset the chart when clikced-->
+        </div>
+    </main>
+
+
+    <script>
+
+        //Creates the pie chart
+        new Chart(document.getElementById("PieChart"), { //finds the chart and creates the canvas
+            type: "pie",//sets it as a pie chart
+            data: {
+                labels: ['Cardio', 'HIIT', 'Yoga', 'Weight Lifting'], //adds the labels
+                datasets: [{
+                    backgroundColor: ["#b91d47", "#00aba9", "#2b5797", "#e8c3b9"], //sets the colours
+                    data: [255, 221, 239, 258]//adds the values used
+                }]
+            }
+        });
+
+
+        // assigns values to bar chart
+        const ageGroups = Array.from({ length: 42 }, (_, i) => (i + 18).toString()); //creates an array and adds values from 18 to 59
+        const ageCounts = [27, 26, 25, 20, 27, 25, 15, 26, 21, 18, 23, 23, 19, 24, 21, 21, 24, 17, 21, 19, 20, 23, 25, 26, 27, 34, 16, 30, 21, 23, 17, 26, 33, 19, 32, 23, 30, 18, 27, 23, 19, 19]; //adds the values to the bar chart
+        const colorPalette = [
+            "#92C5F9", "#4394E5", "#0066CC", "#004D99", "#003366" //sets the colours
+        ];
+
+        // Assigns the colours
+        const barColors = ageGroups.map((_, i) => colorPalette[i % colorPalette.length]);// loops through each age group and adds colours
+
+        // Creates the barchart
+        const barChartCtx = document.getElementById("BarChart").getContext("2d"); //gets the information for the bar chart
+        const barChart = new Chart(barChartCtx, {
+            type: "bar", // Sets the graph as a bar chart
+            data: {
+                labels: ageGroups, // Labels for the x-axis
+                datasets: [{
+                    label: "Number of People",
+                    backgroundColor: barColors, // Adds colour
+                    data: ageCounts // Lables y axis
+                }]
+            },
+            options: {  // Here you define options
+                responsive: true, // Makes the chart responsive to screen size
+                plugins: {
+                    title: {
+                        display: true,
+                        text: "Age Distribution" // Titles the graph
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Ages' // Adds a title to the x axis
+                        }
+                    },
+                    y: {
+                        beginAtZero: true, // Starts the grpah at zero
+                        stepSize: 5, //add space between the lines
+                        title: {
+                            display: true,
+                            text: 'Number of People' // Adds a title to the y axis
+                        }
+                    }
+                }
+            }
+        });
+
+
+
+        // Creates the filter
+        function filterBarChart() { //retrieves the min and max values, converts the string to an integer and sets a default range
+            let minAge = parseInt(document.getElementById("minAge").value) || 18;
+            let maxAge = parseInt(document.getElementById("maxAge").value) || 59;
+
+            // Checks if values are within the range by looping through them using .map and changes or clears the graph based on input
+            let filteredData = ageGroups.map((age, i) => (age >= minAge && age <= maxAge ? ageCounts[i] : 0));
+
+            // Updates the chart
+            barChart.data.datasets[0].data = filteredData; //replaces the bar chart with the filtered data
+            barChart.update();
+        }
+
+        // Creates the reset function
+        function resetChart() { //defines the function
+            document.getElementById("minAge").value = 18; //finds the max and min age then resets them to the defautl range
+            document.getElementById("maxAge").value = 59;
+            barChart.data.datasets[0].data = ageCounts; //removes any filtering and updates the chart
+            barChart.update();
+        }
+    </script>
+</body>
+
+</html>

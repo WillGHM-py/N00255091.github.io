@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computers Project [215082]</title>
+    <!--imports the css-->
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<style>
+    form {
+        /*Inceases the forms size and sets a max width*/
+        width: 80%;
+        max-width: 1000px;
+    }
+
+    .form-control {
+        /*adds a margin below usable buttons like select, drop down etc to make them look better visually*/
+        margin-bottom: 20px;
+    }
+
+    .form-control label {
+        /*Sets the font size, makes the text bold it's then displayed as a block element and adds a margin*/
+        font-size: 16px;
+        font-weight: bold;
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    /*makes the input, select button and text area take up the poll page then adds padding and a border around the text, then it rounds the corners and makes the text fit the boxes*/
+    .form-control input,
+    .form-control select,
+    .form-control textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .form-control textarea {
+        /*sets the text area default height and allows vertical movement */
+        resize: vertical;
+        height: 100px;
+    }
+
+    .form-control input[type="radio"] {
+        /*Sets the width of the raido buttons to their defualt size*/
+        width: auto;
+    }
+
+    .form-control button {
+        /*Colours the submit button, removes the default border, colours the text adds padding, sets the font size, rounds the corners and makes the cursor a hand while hovering over the button aswell as setting the submit button width */
+        background-color: #b40000;
+        border: none;
+        color: white;
+        padding: 14px;
+        font-size: 18px;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    .form-control button:hover {
+        /*Colours the submit button while hovered over*/
+        background-color: #ca4a00;
+    }
+
+    footer {
+        /*Gives the footer a background colour, colours teh text, rounds the corners and adds padding */
+        background-color: #008091;
+        color: white;
+        text-align: center;
+        padding: 1em;
+    }
+</style>
+</head>
+
+<body>
+    <!-- Creates the nav bar, assigns it titles and the links that the nav bar will link to-->
+    <nav>
+        <a href="Home.html">Home</a>
+        <a href="graphs.html">Graphs</a>
+        <a href="table.html">Table</a>
+        <a href="survey.html">Poll</a>
+        <a href="advice.html">Advice</a>
+    </nav>
+
+    <header>
+        <h1>Health Survey</h1>
+    </header>
+
+    <main>
+        <form id="form"><!--Assigns it as a form -->
+
+            <!--Creates a section for the Name input-->
+            <div class="form-control"> <!--Applies the css -->
+                <label for="name">Name</label>
+                <!--Sets the title and makes the title clickable due to the id being shared-->
+                <input type="text" id="name" placeholder="Enter your name" required />
+                <!--Makes the input type text, saves the answer as an id and adds a placeholder aswell as making it requried to fill-->
+            </div>
+            <!--Creates a seperate section for the Age input-->
+            <div class="form-control"> <!--Applies the css -->
+                <label for="age">Age</label> <!--Sets the title and Makes the title clickable-->
+                <input type="number" id="age" placeholder="Enter your age" required />
+                <!--Makes the input type a number, saves the answer as an id  and adds a placeholder aswell as making it requried to fill-->
+            </div>
+
+            <!--Creates a section for the Weight input-->
+            <div class="form-control"> <!--Applies the css -->
+                <label for="weight">Weight (kg)</label> <!--Sets the title and Makes the title clickable-->
+                <input type="number" id="weight" placeholder="Enter your weight in KG" required step="any" />
+                <!--Makes the input type a number(inclduing decimals) it saves the answer as an id, adds a placeholder and makes it  requried to fill-->
+            </div>
+
+            <!--Creates a section for the height-->
+            <div class="form-control"> <!--Applies the css -->
+                <label for="height">Height (cm)</label>
+                <!--Sets the title to Height specifying in centimetres and makes the title clickable-->
+                <input type="number" id="height" placeholder="Enter your height in centimetres" required />
+                <!--Makes the input type a number(whole) it saves the answer as an id, adds a placeholder and makes it  requried to fill-->
+            </div>
+
+            <!--Creates the actitvy drop down menu-->
+            <div class="form-control"><!--Applies the css -->
+                <label for="activity">Activity Level</label> <!--Sets the title and makes the title clickable-->
+                <select id="activity" required>
+                    <!--Creates a drop down menu and makes the area required to be filled  -->
+                    <option value="">--Select Activity Level--</option> <!-- Creates an empty option  -->
+                    <option value="1.2">Sedentary (little or no exercise)</option>
+                    <!--Creates an option and assigns it a value and name-->
+                    <option value="1.375">Lightly Acitve (light exercise 1-3 days a week)</option>
+                    <option value="1.55"> Moderately active (moderate exercise/sports 3-5 days/week)</option>
+                    <option value="1.725">Very active (hard exercise/sports 6-7 days a week)</option>
+                    <option value="1.9">Super active (very hard exercise or a physically demanding job)</option>
+                </select>
+            </div>
+
+            <!--Creates the gender drop down menu-->
+            <div class="form-control"><!--Applies the css -->
+                <label for="gender">Gender</label> <!--Sets the title and makes the title clickable-->
+                <select id="gender" required> <!--Creates a drop down menu and makes the area required to be filled  -->
+                    <option value="">--Select Gender--</option> <!--Creates an empty option-->
+                    <option value="Male">Male</option> <!--Creates an option and assigns it a value and name-->
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+
+            <!--Creates the exercise drop down menu-->
+            <div class="form-control"><!--Applies the css -->
+                <label for="exercise">Preferred form of exercise</label>
+                <!--Sets the title and makes the title clickable-->
+                <select id="exercise" required>
+                    <!--Creates a drop down menu and makes the area required to be filled  -->
+                    <option value="">--Select Exercise Type--</option> <!--Creates an empty option-->
+                    <option value="Cardio">Cardio</option> <!--Creates an option and assigns it a value and name-->
+                    <option value="Yoga">Yoga</option>
+                    <option value="WeightLifting">Weight Lifting</option>
+                    <option value="HIIT">HIIT</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <!--Creates a radio form-->
+            <div class="form-control"> <!--Applies the css -->
+                <label>Do you want to improve your health?</label> <!--Adds the question-->
+                <label for="recommed-1">
+                    <!-- Creates a selectable option gives it an id, value and option. It's also required to be filled-->
+                    <input type="radio" id="recommed-1" name="recommed" value="Yes" required> Yes
+                </label>
+                <label for="recommed-2"> <!--All values share a name so only one value can be selected-->
+                    <input type="radio" id="recommed-2" name="recommed" value="No"> No
+                </label>
+                <label for="recommed-3">
+                    <input type="radio" id="recommed-3" name="recommed" value="Maybe"> Maybe
+                </label>
+            </div>
+
+            <!--Creates a raio form-->
+            <div class="form-control"><!--Applies the css -->
+                <label>Exercise Experience Level (Years)</label> <!--Adds the question-->
+                <label for="experience-1">
+                    <!-- Creates a selectable option, gives it an id, value, title and name. It's also required to be filled-->
+                    <input type="radio" name="experience" value="0-1 Years" required> 0-1 Years
+                    <label for="experience-2"> <!--All names are shared so only one may be chosen-->
+                        <input type="radio" name="experience" value="1-2 Years"> 1-2 Years
+                    </label>
+                    <label for="experience-3">
+                        <input type="radio" name="experience" value="2-3 Years"> 2-3 Years
+                    </label>
+                    <label for="experience-4">
+                        <input type="radio" name="experience" value="3-4 Years"> 3-4 Years
+                    </label>
+                    <label for="experience-5">
+                        <input type="radio" name="experience" value="4-5 Years"> 4-5 Years
+                    </label>
+                    <label for="experience-6">
+                        <input type="radio" name="experience" value="5+"> 5+ Years
+                    </label>
+                    <label for="experience-7">
+                        <input type="radio" name="experience" value="None"> None
+                    </label>
+            </div>
+
+            <!--Creates a text box for comments-->
+            <div class="form-control"><!--Applies the css -->
+                <label for="comment">Any comments or suggestions?</label>
+                <!--Sets the title and makes the title clickable-->
+                <textarea id="comment" placeholder="Enter your comment here"></textarea>
+                <!--Creates an area for the text and adds a place holder-->
+            </div>
+
+            <!--Creates the submit button-->
+            <div class="form-control"><!--Applies the css -->
+                <button type="submit">Submit</button> <!--Creates a button named submit-->
+            </div>
+        </form>
+    </main>
+
+
+    <script>
+        document.getElementById("form").addEventListener("submit", function (event) {// Makes the function run when submit is hit
+            event.preventDefault(); // Stops the form from submitting the normal way
+
+            // saves and collects the poll data
+            const name = document.getElementById("name").value; //finds the value from the element with the same id
+            const age = document.getElementById("age").value;
+            const weight = document.getElementById("weight").value;
+            const height = document.getElementById("height").value;
+            const activity = document.getElementById("activity").value;
+            const gender = document.getElementById("gender").value;
+            const exercise = document.getElementById("exercise").value;
+            const healthImprovement = document.querySelector('input[name="recommed"]:checked')?.value; //finds the checked radio elements
+            const experience = document.querySelector('input[name="experience"]:checked')?.value;
+            const comment = document.getElementById("comment").value;
+
+            const data = [ // Creates the csv files categories
+                name, age, weight, height, activity, gender, exercise, healthImprovement, experience, comment
+            ];
+
+            // Converts the data into a csv format by adding a header and joins this data with commas
+            const csvContent = "Name,Age,Weight,Height,Activity Level, Gender,Exercise,Health Improvement,Experience,Comment\n" + data.join(",") + "\n";
+
+            //Creates a blob object from the csv data, and tells the computer that it is a csv this then specifies the encoding "utf-8"
+            const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+
+            //Creates an anchor element to trigger the csv download
+            const link = document.createElement("a");
+
+            //sets the href attribute of the anchor tag to the Blob objects url allowing the page to link to the csv file
+            link.href = URL.createObjectURL(blob);
+
+            //Assigns the downloaded files name
+            link.download = "HealthSurveyData.csv";
+            //Simulates a click on the anchor tag starting the csv files download
+            link.click();
+        });
+    </script>
+
+    <footer>
+        <p>&copy; 2025 Computers Project [215082]</p>
+    </footer>
+</body>
+
+</html>

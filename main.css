@@ -1,0 +1,87 @@
+
+    body {
+        /* Sets the font, removes margins and padding aswell as applies background color */
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    header {
+        /* gives the header a background colour, makes the text white, centers the text and adds some padding around it*/
+        background-color: #0055a5;
+        color: rgb(255, 255, 255);
+        text-align: center;
+        padding: 1em;
+    }
+
+    nav {
+        /* Assigns the nav bar colour and keeps the nav bar so that it doesnt break its boundaries*/
+        background-color: #0010a0;
+        overflow: hidden;
+    }
+
+    nav a {
+        /* makes the nav bars text white, adds padding, removes the underline and lines the words up for a better appearance*/
+        color: rgb(255, 255, 255);
+        padding: 14px 20px;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    nav a:hover {
+        /* Assigns the nav bar hover colour and text colour while hovered */
+        background-color: #e6e6e6;
+        color: rgb(0, 0, 0);
+    }
+
+    main {
+        /*Assigns padding, centers everything then defines the flex direction and centres it */
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .content-box {
+        /*gives the box a background colour, adds a border,padding,rounds the corners,adds a margin,adds a shadown and sets the max width aswell as sizing it to the page size*/
+        background-color: rgb(255, 255, 255);
+        border: 2px solid #7a7a7a;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 0 10px rgba(139, 128, 128, 0.1);
+        max-width: 900px;
+        width: 100%;
+    }
+
+    .content-box h2 {
+        /*Sets the h2 font size, centres it and creates a margin below it for a nicer appearance*/
+        font-size: 24px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .content-box p {
+        /*Creates the line spacing in box*/
+        line-height: 1.6;
+    }
+
+    .content-box b {
+        /*guarantees that the bold text stays bold*/
+        font-weight: bold;
+    }
+
+    footer {
+        /*sets the footer background colour, assigns the text to white, centres the text and adds padding*/
+        background-color: #005c68;
+        color: rgb(255, 255, 255);
+        text-align: center;
+        padding: 1em;
+    }
+
+    .center-text {
+        /* Centers the text in the first two boxes */
+        text-align: center;
+    }

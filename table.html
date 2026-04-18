@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--imports the css-->
+    <link rel="stylesheet" href="main.css">
+</head>
+<!--Loads the PapaParse library-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
+<title>Filterable Dataset Table</title>
+
+
+<style>
+    .content-box {
+        /*gives the box a background colour, adds a border,padding,rounds the corners,adds a margin,adds a shadown and sets the max width aswell as sizing it to the page size, it then centers the box*/
+        background-color: rgb(255, 255, 255);
+        border: 2px solid #7a7a7a;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 0 10px rgba(139, 128, 128, 0.1);
+        max-width: 900px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 30px;
+        /* Adds space between the header and box */
+    }
+
+
+    .filter-container {
+        /*Centers the drop down box, adds a margin, centres the values and sets the menu size*/
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .filter-container input,
+    .filter-container select {
+        /*Adds padding, sets the width, adds a border, rounds the borders and limits the border width*/
+        padding: 10px;
+        width: 300px;
+        border: 1px solid #c5c5c5;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    table {
+        /*Sets the table size, adds a margin and merges the borders together aswell as adds a background colour*/
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+        background-color: white;
+    }
+
+    table,
+    th,
+    td {
+        /*Adds a thin grey border around the  table*/
+        border: 1px solid #ddd;
+    }
+
+    th,
+    td {
+        /* Moves the text in the table and adds padding*/
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        /*Makes the tables header and text colour while adding padding*/
+        background-color: #0055a5;
+        color: white;
+        padding: 10px;
+    }
+</style>
+
+
+
+<body>
+    <!-- Creates the nav bar, assigns it titles and the links that the nav bar will link to-->
+    <nav>
+        <a href="Home.html">Home</a>
+        <a href="graphs.html">Graphs</a>
+        <a href="table.html">Table</a>
+        <a href="survey.html">Poll</a>
+        <a href="advice.html">Advice</a>
+    </nav>
+
+
+    <header>
+        <h1>Dataset Filter Table</h1>
+    </header>
+    <!--Creates a content box where it explains how to use the file reeader -->
+    <div class="content-box center-text">
+        <h2>How to use</h2>
+        <p>In order to use the file reader, you need to a select choose a file, once selected find the file located
+            named Exercises.csv then select it and confirm. It will then generate
+            a table with all the values with a search bar with a drop down menu where you select the column and input
+            the value to filter
+            </b><br>
+            <br>
+            <small><b>Make sure the correct file is chosen, if not seen it may be in the downloads folder</b></small>
+        </p>
+    </div>
+
+    <main>
+
+        <!--Creates an input for the csv file-->
+        <div class="filter-container">
+            <input type="file" id="fileInput" accept=".csv" />
+        </div>
+
+        <!--Creates the filter menu-->
+        <div class="filter-container">
+            <select id="columnSelect"> <!--Displays the drop down menu, java script fills in alter-->
+            </select>
+            <input type="text" id="searchInput" placeholder="Search in selected column..." />
+            <!--Creates the search bar, adds a palce holder and assigns the type as text-->
+        </div>
+        <!--Creates the table and headers-->
+        <div class="table-container"> <!--assigns the css style-->
+            <table id="csvTable"> <!--Creates an empty table-->
+                <thead>
+                    <tr>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+
+    <script>
+        // Stores the csv's data
+        let csvData = [];
+        let csvHeaders = [];
+
+        // When a file is selected, processes it
+        document.getElementById('fileInput').addEventListener('change', function (e) { //Finds the file chosen, and runs the function when selected it selected
+            const file = e.target.files[0]; // Makes sure only one file is chosen
+
+            // Reads and sorts the file then saves the data
+            if (file) { //ensures a file was chosen
+                Papa.parse(file, { //uses papaparse to read the file
+                    complete: function (results) { // runs the function when file fully read
+                        csvData = results.data; // Saves the csv rows
+                        csvHeaders = results.meta.fields; // Saves the csv headers
+
+                        if (csvData.length > 0) {
+                            displayTable(csvData); // Fills the table with the values
+                        } else {
+                            alert('The Csv cant be read');//displays and error message if its format is wrong
+                        }
+                    },
+                    header: true, // ignores the first csv file row
+                    skipEmptyLines: true // Removes empty rows
+                });
+            }
+        });
+
+        // Displays the csv file data in a html table
+        function displayTable(data) { //displays the data in a table
+            const table = document.getElementById('csvTable');//finds the csv file
+            const thead = table.querySelector('thead tr');// Finds the tables header
+            const tbody = table.querySelector('tbody'); //Finds the tables body
+            const columnSelect = document.getElementById('columnSelect'); //finds the elements for the drop down menu
+            const searchInput = document.getElementById('searchInput');// finds the search bar
+
+            //Clears the old data from the csv file
+            thead.innerHTML = '';
+            tbody.innerHTML = '';
+
+            //makes sure the csv file is empty
+            if (data.length === 0) {
+                alert('No data to display.');
+                return;
+            }
+
+            // Re adds the csv headers and extracts the anems as an array
+            const headers = Object.keys(data[0]);
+
+            // Adds headers to the table
+            headers.forEach(header => {// loops throught each header
+                const th = document.createElement('th');//creates a table header element
+                th.textContent = header; // Saves the headers in the th element
+                thead.appendChild(th);//adds the headers to the theads
+            });
+
+            // Fills the dropdown menu
+            columnSelect.innerHTML = ''; // the options will be placed here
+            headers.forEach((header, index) => {//loops through each columns name
+                const option = document.createElement('option');//creates a new element allowing an option to be chosen
+                option.value = index; //assigns the columns values
+                option.textContent = header; //displays the dropwodn text
+                columnSelect.appendChild(option);//makes the dropdown menu visible
+            });
+
+            // Adds the rows to the html table
+            data.forEach(row => { //loops through each row of the csv file
+                const tr = document.createElement('tr');//creates a table row and stores the new values in it  
+                headers.forEach(header => {//loops through all the headers 
+                    const td = document.createElement('td');//creates a table
+                    td.textContent = row[header] || ''; // Makes the table empty at first
+                    tr.appendChild(td); //adds the rows and cells to the file
+                });
+                tbody.appendChild(tr);//closes the loop
+            });
+
+            // Apply filtering when dropdown or input changes
+            columnSelect.addEventListener('change', () => filterTable(searchInput.value, columnSelect.value));//changes the table based on the column chosen from the drop down menu and updates the table
+            searchInput.addEventListener('input', () => filterTable(searchInput.value, columnSelect.value)); //Changes the table based on whats typed in the search bar
+        }
+
+        // Function is triggered when the user types in the search box or selects a new column
+        function filterTable(searchQuery, columnIndex) { //creates a function for the search bar and dropdown choice
+            const rows = document.querySelectorAll('#csvTable tbody tr');//selects all the rows inside the csv file
+
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');//selects all the cells in the row
+                const cellText = cells[columnIndex]?.textContent.toLowerCase() || ''; // selects the column chosen for the search
+                row.style.display = cellText.includes(searchQuery.toLowerCase()) ? '' : 'none';//checks if the cells contain the item searched
+            });
+        }
+
+    </script>
+</body>
+
+</html> 
