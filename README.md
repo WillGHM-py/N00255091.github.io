@@ -1,1 +1,84 @@
 # N00255091.github.io
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computers Project [215082]</title>
+
+    <!--imports the css-->
+    <link rel="stylesheet" href="main.css">
+</head>
+
+
+<body>
+    <!-- Creates the nav bar, assigns it titles and the links that the nav bar will link to-->
+    <nav>
+        <a href="Home.html">Home</a>
+        <a href="graphs.html">Graphs</a>
+        <a href="table.html">Table</a>
+        <a href="survey.html">Poll</a>
+        <a href="advice.html">Advice</a>
+    </nav>
+
+    <header>
+        <h1>About my dataset</h1>
+    </header>
+
+    <main>
+        <div class="content-box center-text"> <!--Assigns it as a content box and centres the text-->
+            <h2>GYM STATISTICS</h2>
+            <p>This website displays gym members data including their age, weight, and height, along with other basic.
+                details. There <br>
+                are 973 columns of the data and is described as ideal for data scientists, health researchers,
+                <br>
+                and fitness enthusiasts interested in studying exercise habits, modelling fitness progression, or<br>
+                analysing the relationship between demographic and physiological data.
+            </p>
+        </div>
+
+        <div class="content-box  ">
+            <h2>Recorded Data</h2>
+            <!-- makes the text bold and breaks the line for better layout-->
+            <p><b>Age:</b> Age of the gym member<br>
+                <b>Gender:</b> Gender of the gym member (Male or Female)<br>
+                <b>Weight (kg):</b> Members weight in kilograms<br>
+                <b>Height (m):</b> Members height in meters<br>
+                <b>Max_BPM:</b> Maximum heart rate (beats per minute) during workout sessions.<br>
+                <b>Avg_BPM:</b> Resting_BPM: Heart rate at rest before workout.<br>
+                <b>Session_Duration (hours):</b> Duration of each workout session in hours.<br>
+                <b>Calories_Burned:</b> Total calories burned during each session.<br>
+                <b>Workout Types:</b> Type of workout performed (e.g., Cardio, Strength, Yoga, HIIT).<br>
+                <b>Fat_Percentage:</b> Body fat percentage of the member.<br>
+                <b>Water_Intake (liters):</b> Daily water intake during workouts.<br>
+                <b>Workout_Frequency (days/week):</b> Number of workout sessions per week.<br>
+                <b>Experience_Level:</b> Level of experience, from beginner (1) to expert (3).<br>
+                <b>BMI:</b> Body Mass Index, calculated from height and weight.
+            </p>
+        </div>
+
+
+        <div class="content-box center-text"><!--Assigns it as a content box and centres the text-->
+            <h2>How to use the site </h2>
+            <p>My website is made to display the data of all the people attending a public gym, their ages weight and
+                heights as well as basic information are taken.
+                this gives a general idea of their health as well as displaying any correlation between age groups,
+                gender or preferred exercise type. The data for certain
+                features are then graphed on a graph page the parameters can be changed based on the users uses. You can
+                then fill in our survey and have graph created which
+                will contrast your results against the best and worst in your age group. You can then go to the advice.
+                page and your BMI, Daily maintenance calories and others. It
+                will also display calories needed for weight loss and gain depending on the amount wanted to be lost or
+                gained.
+
+            </p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Computers Project [215082]</p>
+    </footer>
+</body>
+
+</html>
