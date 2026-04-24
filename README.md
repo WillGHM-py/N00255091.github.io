@@ -1,5 +1,4 @@
 # N00255091.github.io
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
